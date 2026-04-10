@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Perfil — G-Now</title>
+  <style>
+
+    /* Minimal Steam-like profile styles */
+    :root{--bg:#0b1620;--card:#0f2430;--muted:#9aa4b2;--accent:#66c0f4}
+    body{background:linear-gradient(180deg,#07121a 0%, #081826 60%);color:#e6f2fb;font-family:Arial,Helvetica,sans-serif;margin:0}
+  .header{display:flex;align-items:center;gap:12px;padding:12px 20px;background:rgba(0,0,0,.2)}
+  /* Back to home button in header */
+  .header .back-btn{margin-left:auto;background:var(--accent);color:#071826;padding:8px 12px;border-radius:6px;text-decoration:none;font-weight:700}
+  .header .back-btn:focus{outline:2px solid rgba(102,192,244,.25)}
+    .brand{font-weight:700;color:var(--accent);text-decoration:none}
+    .profile-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.6))}
+
+    .profile-main{max-width:980px;margin:-60px auto 40px;display:flex;gap:20px;align-items:flex-end;padding:0 20px}
+    .avatar{width:140px;height:140px;border-radius:12px;overflow:hidden;border:4px solid rgba(0,0,0,.6);box-shadow:0 6px 20px rgba(0,0,0,.6)}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+
+    .profile-info{flex:1;color:#fff}
+    .profile-info h1{margin:0;font-size:1.6rem}
+    .profile-meta{color:var(--muted);margin-top:6px}
+    .level-badge{display:inline-block;background:rgba(255,255,255,.06);padding:6px 10px;border-radius:999px;margin-left:10px;font-weight:700}
+
+    .badges{margin-top:14px;display:flex;gap:8px}
+    .badge{background:rgba(255,255,255,.03);padding:8px;border-radius:6px;color:var(--muted);font-size:0.9rem}
+
+    .content{max-width:980px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:2fr 1fr;gap:20px}
+    .card{background:var(--card);padding:14px;border-radius:8px}
+    .recent-games .games-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .game{display:flex;gap:10px;align-items:center}
+    .game img{width:72px;height:48px;object-fit:cover;border-radius:6px}
+    .game .meta{color:var(--muted);font-size:0.9rem}
+
+    .right-col .friend-summary{display:flex;gap:10px;align-items:center}
+    .small-avatar{width:48px;height:48px;border-radius:8px;overflow:hidden}
+    .small-avatar img{width:100%;height:100%;object-fit:cover}
+
+    footer{max-width:980px;margin:40px auto;color:var(--muted);padding:0 20px}
+
+    /* profile button small responsive fix */
+    .profile-btn{display:inline-block;margin-right:8px}
+    .profile-btn img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.06)}
+
+    @media(max-width:720px){.profile-main{flex-direction:column;align-items:center}.content{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="geforce-clone.html">G-Now</a>
+    <meta property="og:title" content="G-Now — Perfil de usuario" />
+    <meta property="og:description" content="Perfil de usuario en G-Now — tus juegos, actividad y logros." />
+    <meta property="og:image" content="img/albion.jpg" />
+  <button class="btn" id="shareBtn">Compartir</button>
+  </header>
+
+  <section class="profile-banner">
+    <div class="profile-overlay"></div>
+  </section>
+
+  <section class="profile-main">
+    <div class="avatar">
+      <img src="img/se.jpg" alt="Avatar" />
+    </div>
+    <div class="profile-info">
+      <h1>UsuarioEjemplo <span class="level-badge">Nivel 12</span></h1>
+      <div class="profile-meta">Desde: 2021 · Última vez en línea: Hoy · Ubicación: Rep.Dom</div>
+      <div class="badges">
+        <div class="badge">Badge: Pro Player</div>
+        <div class="badge">Miembro desde 2021</div>
+        <div class="badge">Coleccionista</div>
+      </div>
+    </div>
+  </section>
+
+  <main class="content">
+    <section class="left-col">
+      <div class="card recent-games">
+        <h3>Juegos recientes</h3>
+        <div class="games-grid">
+          <div class="game">
+            <img src="img/descarga.jpg" alt="Hollow Knight">
+            <div class="meta"><strong>Hollow Knight</strong><div>Tiempo jugado: 120 h · Última semana: 5 h</div></div>
+          </div>
+          <div class="game">
+            <img src="img/descarga%20(1).jpg" alt="Forza Horizon 5">
+            <div class="meta"><strong>Forza Horizon 5</strong><div>Tiempo jugado: 40 h · Última semana: 3 h</div></div>
+          </div>
+          <div class="game">
+            <img src="img/images.jpg" alt="Warzone">
+            <div class="meta"><strong>Warzone</strong><div>Tiempo jugado: 10 h · Última semana: 0 h</div></div>
+          </div>
+          <div class="game">
+            <img src="img/gta.jpg" alt="GTA V">
+            <div class="meta"><strong>GTA V</strong><div>Tiempo jugado: 75 h · Última semana: 2 h</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <h3>Actividad reciente</h3>
+        <p class="profile-meta">Jugó a Hollow Knight hace 2 horas. Subió 3 logros esta semana.</p>
+      </div>
+    </section>
+
+    <aside class="right-col">
+      <div class="card friend-summary">
+        <div class="small-avatar"><img src="img/fornite.jpg" alt="friend"></div>
+        <div>
+          <strong>Amigos</strong>
+          <div class="profile-meta">12 amigos en línea</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <h3>Logros</h3>
+        <p class="profile-meta">28 logros desbloqueados · 72% completado</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    © 2025 G-Now Clone — Perfil de usuario
+  </footer>
+
+</body>
+</html>

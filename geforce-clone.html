@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GeForce Now — Clone</title>
+  <link rel="stylesheet" href="styles/geforce.css" />
+  <style>
+  /* Profile button: fixed to top-right corner */
+  #profileBtn{position:fixed;right:12px;top:12px;z-index:12000;display:inline-block;cursor:pointer}
+  #profileBtn img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.06);pointer-events:none}
+    @media(min-width:900px){ /* when large, keep inside header area */
+      #profileBtn{top:12px;right:18px}
+    }
+    /* keep some space between the fixed profile avatar */
+    @media(max-width:720px){
+      /* on small screens reduce the margin so the nav doesn't overflow */
+      #profileBtn{right:8px}
+    }
+    /* User status in header when logged in */
+    #userStatus{margin-left:12px;display:inline-flex;align-items:center;gap:8px;color:#fff}
+    #userStatus .user-greeting{font-weight:700}
+      /* Game carousel styles */
+      .games-carousel{position:relative;width:100%;height:280px;overflow:hidden;background:rgba(0,0,0,.1);border-radius:8px}
+      .carousel-track{display:flex;width:fit-content;animation:scroll 20s linear infinite}
+      .carousel-item{flex-shrink:0;width:180px;height:280px;margin-right:12px}
+      .carousel-item img{width:100%;height:100%;object-fit:cover;border-radius:6px}
+      @keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(calc(-180px * 8 - 12px * 8))}}
+      /* Offers section: grid of cards */
+        #offers{background:linear-gradient(135deg,#0a1420 0%,#0f1a28 100%);padding:40px 20px;margin:40px 0}
+        .offers-container{max-width:1200px;margin:0 auto}
+        .offers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+        .offer-card{background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;display:flex;flex-direction:column;gap:8px;align-items:stretch}
+        .offer-card img{width:100%;height:140px;object-fit:cover;border-radius:6px}
+        .offer-card h4{margin:0;color:#fff;font-size:1em}
+        .offer-card .prices{display:flex;gap:8px;align-items:center}
+        .offer-card .old{color:#9aa4b2;text-decoration:line-through}
+        .offer-card .new{color:#00a651;font-weight:700}
+        .offer-card .buy{margin-top:auto}
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Profile button top-left -->
+      <a href="perfil.html" id="profileBtn" class="profile-btn" title="Mi perfil" aria-label="Ir a mi perfil">
+        <img src="img/se.jpg" alt="Avatar" />
+      </a>
+      <a class="brand" href="#">G-Now</a>
+      <nav class="main-nav" id="main-nav">
+        <a href="#home">Inicio</a>
+        <a href="#games">Juegos</a>
+        <a href="#pricing">Precios</a>
+        <a href="tienda.html" class="btn">Tienda</a>
+        <!-- Carrito button (green) -->
+        <button class="btn cart" id="cartBtn" aria-haspopup="dialog" aria-controls="cartPanel">Carrito <span id="cartCount" class="cart-count">0</span></button>
+        <!-- Nuevo botón para navegar a la página de inicio/registro -->
+        <a href="login.html" class="btn ghost" id="loginPageBtn">Iniciar sesión</a>
+        <span id="userStatus" aria-live="polite"></span>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <h1>Juega a tus juegos favoritos desde la nube</h1>
+          <p>Streaming de juegos en 1080p, baja latencia y tu librería lista al instante.
+           Juega tus juegos, con la potencia de la nube. Juega con el rendimiento de GeForce Clone, donde quieras. Ahora puedes transmitir en directo con los servidores NVIDIA Blackwell RTX, que ya están disponibles.
+          </p>
+          <div class="hero-cta">
+            <a class="btn primary" href="#pricing">Probar gratis</a>
+            <a class="btn outline" href="#games">Ver juegos</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <!-- Game carousel: continuous scrolling images -->
+          <div class="games-carousel">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-item"><img src="img/descarga.jpg" alt="Hollow Knight" /></div>
+              <div class="carousel-item"><img src="img/descarga%20(1).jpg" alt="Forza Horizon 5" /></div>
+              <div class="carousel-item"><img src="img/images.jpg" alt="Warzone" /></div>
+              <div class="carousel-item"><img src="img/gta.jpg" alt="GTA V" /></div>
+              <div class="carousel-item"><img src="img/fornite.jpg" alt="Fortnite" /></div>
+              <div class="carousel-item"><img src="img/cyberpunk.jpg" alt="Cyberpunk" /></div>
+              <div class="carousel-item"><img src="img/albion.jpg" alt="Albion Online" /></div>
+              <div class="carousel-item"><img src="img/diablo.jpg" alt="Diablo" /></div>
+              <!-- Duplicated for seamless loop -->
+              <div class="carousel-item"><img src="img/descarga.jpg" alt="Hollow Knight" /></div>
+              <div class="carousel-item"><img src="img/descarga%20(1).jpg" alt="Forza Horizon 5" /></div>
+              <div class="carousel-item"><img src="img/images.jpg" alt="Warzone" /></div>
+              <div class="carousel-item"><img src="img/gta.jpg" alt="GTA V" /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features container">
+      <div class="feature">
+        <h3>Baja Latencia</h3>
+        <p>Optimizado para jugar sin interrupciones.</p>
+      </div>
+      <div class="feature">
+        <h3>Calidad HDR</h3>
+        <p>Gráficos nítidos y colores vivos.</p>
+      </div>
+      <div class="feature">
+        <h3>Acceso Instantáneo</h3>
+        <p>Tu librería siempre disponible en la nube.</p>
+      </div>
+    </section>
+
+    <section id="offers">
+      <h2 style="text-align:center;margin-bottom:30px;color:#fff">Ofertas Disponibles</h2>
+      <div class="offers-container">
+        <div class="offers-grid" id="offersGrid">
+          <!-- Las tarjetas de oferta se renderizan aquí mediante JS -->
+        </div>
+      </div>
+    </section>
+
+    <section id="games" class="games container">
+      <h2>Juegos Populares</h2>
+      <div class="games-grid">
+          <article class="game-card" data-id="hk" data-title="Hollow Knight" data-price="9.99">
+            <img src="img/descarga.jpg" alt="Hollow knight" />
+            <h4>1. Hollow Knight</h4>
+            <p class="price">$9.99</p>
+            <button class="btn add-to-cart">Agregar al carrito</button>
+          </article>
+          <article class="game-card" data-id="fh5" data-title="Forza Horizon 5" data-price="19.99">
+            <img src="img/descarga%20(1).jpg" alt="Forza Horizon 5" />
+            <h4>2. Forza Horizon 5</h4>
+            <p class="price">$19.99</p>
+            <button class="btn add-to-cart">Agregar al carrito</button>
+          </article>
+          <article class="game-card" data-id="wz" data-title="Warzone" data-price="0.00">
+            <img src="img/images.jpg" alt="Warzone" />
+            <h4>3. Warzone</h4>
+            <p class="price">Gratis</p>
+            <button class="btn add-to-cart">Agregar al carrito</button>
+          </article>
+      </div>
+    </section>
+
+    <section id="pricing" class="pricing container">
+      <h2>Planes</h2>
+      <div class="pricing-grid">
+        <div class="plan-card">
+          <h3>Básico</h3>
+          <p class="price">Gratis</p>
+          <ul>
+            <li>Acceso limitado</li>
+            <li>Resolución 720p</li>
+          </ul>
+          <a class="btn ghost" href="#">Elegir</a>
+        </div>
+        <div class="plan-card featured">
+          <h3>Priority</h3>
+          <p class="price">$9.99/mes</p>
+          <ul>
+            <li>Acceso prioritario</li>
+            <li>1080p / 60 FPS</li>
+          </ul>
+          <a class="btn primary" href="#">Suscribirse</a>
+        </div>
+        <div class="plan-card">
+          <h3>Ultimate</h3>
+          <p class="price">$29.99/mes</p>
+          <ul>
+            <li>RTX, 4K</li>
+            <li>Acceso exclusivo</li>
+          </ul>
+          <a class="btn ghost" href="#">Suscribirse</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+
+  
+
+  <!-- Cart panel -->
+  <style>
+    /* Cart styles */
+    .btn.cart{background:#16a34a;color:#fff;border:0;padding:8px 12px;border-radius:6px}
+    .cart-count{background:#052e16;color:#fff;padding:2px 7px;border-radius:999px;margin-left:8px;font-weight:700}
+    #cartPanel{display:none;position:fixed;right:16px;top:70px;width:320px;max-height:70vh;overflow:auto;background:#071023;color:#fff;padding:16px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:10000}
+    #cartPanel.open{display:block}
+    #cartPanel h3{margin-top:0}
+    .cart-item{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+    .cart-item img{width:56px;height:40px;object-fit:cover;border-radius:6px}
+    .cart-item .meta{flex:1}
+    .cart-item .remove{background:transparent;border:0;color:#f97316;cursor:pointer}
+    .cart-footer{margin-top:12px;display:flex;justify-content:space-between;align-items:center}
+    .cart-empty{color:#9aa4b2}
+  </style>
+
+  <aside id="cartPanel" aria-hidden="true" aria-labelledby="cartTitle">
+    <h3 id="cartTitle">Tu carrito</h3>
+    <div id="cartItems"></div>
+    <div id="cartEmpty" class="cart-empty">No hay items en el carrito.</div>
+    <div class="cart-footer">
+      <strong>Total: <span id="cartTotal">$0.00</span></strong>
+      <div>
+        <button id="checkoutBtn" class="btn primary">Pagar</button>
+        <button id="closeCart" class="btn ghost">Cerrar</button>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    // Toggle simple mobile nav
+    const navToggle = document.getElementById('navToggle');
+    const mainNav = document.getElementById('main-nav');
+    navToggle && navToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('open');
+    });
+  </script>
+
+  
+
+  <script>
+    // Ensure profile button navigates to perfil.html even if something else intercepts the click
+    (function(){
+      const p = document.getElementById('profileBtn');
+      if(!p) return;
+      p.addEventListener('click', function(e){
+        // allow normal navigation first; if href is present, navigate to it
+        const href = p.getAttribute('href') || 'perfil.html';
+        // small timeout to allow default, otherwise force navigation
+        setTimeout(()=>{ if(location.pathname.endsWith('/geforce-clone.html') || location.pathname.endsWith('')){ location.href = href; } }, 50);
+      });
+    })();
+  </script>
+
+  <script>
+    // Mostrar usuario conectado en el header y manejar logout
+    (function(){
+      function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':"&#39;"}[c]; }); }
+      const userStatus = document.getElementById('userStatus');
+      const loginLink = document.getElementById('loginPageBtn');
+      if(!userStatus) return;
+      const raw = localStorage.getItem('gnow_current_user');
+      if(raw){
+        try{
+          const usr = JSON.parse(raw);
+          const name = usr && usr.name ? escapeHtml(usr.name) : escapeHtml(usr.email || 'Usuario');
+          if(loginLink) loginLink.style.display = 'none';
+          userStatus.innerHTML = `<span class="user-greeting">Hola, ${name}</span> <button id="logoutBtn" class="btn ghost">Cerrar sesión</button>`;
+          const btn = document.getElementById('logoutBtn');
+          btn && btn.addEventListener('click', function(){ localStorage.removeItem('gnow_current_user'); location.reload(); });
+        }catch(e){
+          if(loginLink) loginLink.style.display = '';
+        }
+      } else {
+        if(loginLink) loginLink.style.display = '';
+        userStatus.innerHTML = '';
+      }
+    })();
+  </script>
+
+
+
+  <script>
+    // Simple cart implementation
+    (function(){
+      const cartBtn = document.getElementById('cartBtn');
+      const cartPanel = document.getElementById('cartPanel');
+      const closeCart = document.getElementById('closeCart');
+      const cartItemsEl = document.getElementById('cartItems');
+      const cartCountEl = document.getElementById('cartCount');
+      const cartTotalEl = document.getElementById('cartTotal');
+      const cartEmpty = document.getElementById('cartEmpty');
+
+      let cart = JSON.parse(localStorage.getItem('gnow_cart') || '[]');
+
+      function saveCart(){ localStorage.setItem('gnow_cart', JSON.stringify(cart)); }
+
+      function formatMoney(n){ return '$' + Number(n).toFixed(2); }
+
+      function renderCart(){
+        cartItemsEl.innerHTML = '';
+        if(cart.length === 0){ cartEmpty.style.display = 'block'; cartTotalEl.textContent = formatMoney(0); }
+        else{
+          cartEmpty.style.display = 'none';
+          let total = 0;
+          cart.forEach(item => {
+            total += Number(item.price) * (item.quantity || 1);
+            const div = document.createElement('div');
+            div.className = 'cart-item';
+            div.innerHTML = `
+              <img src="${item.img}" alt="${item.title}">
+              <div class="meta"><div>${item.title}</div><div style="font-size:0.85em;color:#9aa4b2">${formatMoney(item.price)} x ${item.quantity||1}</div></div>
+              <button class="remove" data-id="${item.id}">Quitar</button>
+            `;
+            cartItemsEl.appendChild(div);
+          });
+          cartTotalEl.textContent = formatMoney(total);
+        }
+        cartCountEl.textContent = cart.reduce((s,i)=>s+(i.quantity||1),0);
+      }
+
+      function addToCart(item){
+        const existing = cart.find(i=>i.id===item.id);
+        if(existing){ existing.quantity = (existing.quantity||1) + 1; }
+        else{ cart.push(Object.assign({quantity:1}, item)); }
+        saveCart(); renderCart();
+      }
+
+      function removeFromCart(id){ cart = cart.filter(i=>i.id!==id); saveCart(); renderCart(); }
+
+      // wire up add-to-cart buttons
+      document.querySelectorAll('.game-card').forEach(card => {
+        const btn = card.querySelector('.add-to-cart');
+        if(!btn) return;
+        const item = {
+          id: card.getAttribute('data-id'),
+          title: card.getAttribute('data-title'),
+          price: card.getAttribute('data-price'),
+          img: card.querySelector('img') ? card.querySelector('img').src : ''
+        };
+        btn.addEventListener('click', function(){ addToCart(item); });
+      });
+
+      // cart open/close
+      cartBtn && cartBtn.addEventListener('click', function(){ cartPanel.classList.toggle('open'); cartPanel.setAttribute('aria-hidden', cartPanel.classList.contains('open') ? 'false' : 'true'); });
+      closeCart && closeCart.addEventListener('click', function(){ cartPanel.classList.remove('open'); cartPanel.setAttribute('aria-hidden','true'); });
+
+      // delegate remove buttons
+      cartItemsEl && cartItemsEl.addEventListener('click', function(e){ if(e.target && e.target.matches('.remove')) removeFromCart(e.target.getAttribute('data-id')); });
+
+      // initial render
+      renderCart();
+    })();
+  </script>
+
+  <script>
+    // Offers: render grid of offer cards and handle buy actions
+    (function(){
+      const offers = [
+        { id: 'cp2077', title: 'Cyberpunk 2077', img: 'img/cyberpunk.jpg', old: '$59.99', new: '$20.99', price: '20.99', tags: ['Acción', 'Rol', 'Mundo abierto'], desc: 'Sumérgete en el futuro de Night City. Cyberpunk 2077 es un juego de rol de acción de mundo abierto que te permite vivir una historia épica.' },
+        { id: 'outlast', title: 'The Outlast Trials', img: 'img/forest.jpg', old: '$29.99', new: '$8.99', price: '8.99', tags: ['Terror', 'Multijugador', 'Survival'], desc: 'Una experiencia aterradora de supervivencia. Enfrenta desafíos psicológicos y peligros.' },
+        { id: 'rust', title: 'Rust', img: 'img/images.jpg', old: '$39.99', new: '$19.99', price: '19.99', tags: ['Supervivencia', 'Multijugador', 'Sandbox'], desc: 'Sobrevive en un mundo hostil. Construye, lucha y haz amigos en Rust.' },
+        { id: 'gta5', title: 'Grand Theft Auto V', img: 'img/gta.jpg', old: '$59.99', new: '$26.39', price: '26.39', tags: ['Acción', 'Mundo abierto', 'Multijugador'], desc: 'Vive historias épicas en Los Santos. GTA V ofrece libertad y caos en abundancia.' },
+        { id: 'witcher3', title: 'The Witcher 3', img: 'img/world.jpg', old: '$49.99', new: '$9.99', price: '9.99', tags: ['RPG', 'Aventura', 'Fantasía'], desc: 'Sigue la leyenda de Geralt de Rivia. Un viaje épico lleno de misterio y decisiones.' },
+        { id: 'forza5', title: 'Forza Horizon 5', img: 'img/descarga%20(1).jpg', old: '$59.99', new: '$35.99', price: '35.99', tags: ['Racing', 'Simulación', 'Mundo abierto'], desc: 'Siente el poder de la velocidad en México. Forza Horizon 5 redefine los juegos de carreras.' }
+      ];
+
+      const grid = document.getElementById('offersGrid');
+      if(!grid) return;
+
+      function render(){
+        grid.innerHTML = offers.map((o, idx) => `
+          <div class="offer-card" data-offer="${idx}">
+            <img src="${o.img}" alt="${o.title}" />
+            <h4>${o.title}</h4>
+            <div class="prices"><span class="old">${o.old}</span><span class="new">${o.new}</span></div>
+            <p style="color:#cbd5e1;font-size:0.9em;line-height:1.2;">${o.desc}</p>
+            <div class="buy">
+              <button class="btn primary buyBtn" data-offer="${idx}">Comprar ahora</button>
+            </div>
+          </div>
+        `).join('');
+
+        grid.querySelectorAll('.buyBtn').forEach(btn=>{
+          btn.addEventListener('click', function(){
+            const idx = this.getAttribute('data-offer');
+            const offer = offers[idx];
+            const cart = JSON.parse(localStorage.getItem('gnow_cart')||'[]');
+            const existing = cart.find(i=>i.id===offer.id);
+            if(existing) existing.quantity = (existing.quantity||1)+1;
+            else cart.push({id:offer.id,title:offer.title,price:offer.price,img:offer.img,quantity:1});
+            localStorage.setItem('gnow_cart', JSON.stringify(cart));
+            const countEl = document.getElementById('cartCount');
+            if(countEl) countEl.textContent = cart.reduce((s,i)=>s+(i.quantity||1),0);
+            const original = this.textContent;
+            this.textContent = 'Añadido ✓';
+            const self = this;
+            setTimeout(()=>{ self.textContent = original; }, 1200);
+          });
+        });
+      }
+
+      render();
+    })();
+  </script>
+</body>
+
+</html>
+<!DOCTYPE html> 
+
+<html lang="es"> 
+
+<head> 
+
+    <meta charset="UTF-8"> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <title>GeForce Now Clone</title> 
+
+    <link rel="stylesheet" href="styles.css"> 
+
+</head> 
+
+<body> 
+
+    <!-- Sección de Juegos --> 
+
+    <section id="games" class="games"> 
+
+
+
+    </section> 
+
+        </div> 
+
+        <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juegos</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .galeria {
+      display: flex;
+      flex-wrap: wrap;        /* Hace que salten a otra línea si no caben */
+      gap: 15px;              /* Espacio entre imágenes */
+      justify-content: center;/* Centra las imágenes */
+    }
+
+    .juego {
+      width: 300px;           /* Tamaño fijo de cada bloque */
+      text-align: center;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .juego img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;      /* Ajusta sin deformar */
+    }
+
+    .juego h3 {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+   <!-- Barra de navegación --> 
+
+  <header> 
+
+        <nav> 
+
+            <ul> 
+
+                <li><a href="#home">Inicio</a></li> 
+
+                <li><a href="#games">Juegos</a></li> 
+
+                <li><a href="#pricing">Precios</a></li> 
+
+            </ul> 
+
+        </nav> 
+
+    </header> 
+
+   <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© 2025 G-Now Clone</div>
+      <nav class="footer-nav">
+        <a href="#">Ayuda</a>
+        <a href="#">Términos</a>
+        <a href="#">Privacidad</a>
+        <a heef="#">Contacto</a>
+      </nav>
+    </div>
+  </footer>
+
+
+
+</body>
+</html>
+
+     
+
+  
+
+    
+ 

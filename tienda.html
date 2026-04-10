@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tienda — G-Now</title>
+    <link rel="stylesheet" href="styles/geforce.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="geforce-clone.html">G-Now</a>
+      <nav class="main-nav">
+        <a href="geforce-clone.html">Inicio</a>
+        <a href="tienda.html">Tienda</a>
+        <a href="geforce-clone.html#pricing">Precios</a>
+        <!-- Cart button (green) - same as main page -->
+        <button class="btn cart" id="cartBtn" aria-haspopup="dialog" aria-controls="cartPanel">Carrito <span id="cartCount" class="cart-count">0</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="store-hero">
+      <div class="store-hero-inner">
+        <h1>Tienda — G-Now</h1>
+        <p class="text-muted">Compra, descubre y guarda tus juegos favoritos.</p>
+      </div>
+    </section>
+
+    <section class="store-layout">
+      <aside class="store-sidebar">
+        <h4>Categorías</h4>
+        <ul>
+          <li>Acción</li>
+          <li>Aventura</li>
+          <li>Racing</li>
+          <li>Indie</li>
+          <li>Multijugador</li>
+          <li>RPG</li>
+          <li>Terror</li>
+        </ul>
+
+        <h4 style="margin-top:1rem">Filtros</h4>
+        <ul>
+          <li>En oferta</li>
+          <li>Gratis para jugar</li>
+          <li>4K / RTX</li>
+        </ul>
+      </aside>
+
+      <div class="store-main">
+        <div class="search-row">
+          <input id="gameSearch" class="search" placeholder="Buscar juegos..." aria-label="Buscar juegos" />
+          <a class="btn ghost" href="#">Ordenar</a>
+        </div>
+        <div id="noResults" style="display:none;color:#cbd5e1;margin-top:12px">No se encontraron juegos.</div>
+
+        <div class="store-grid">
+          <article class="game-card">
+            <img src="img/descarga.jpg" alt="Hollow Knight" />
+            <div class="game-meta">
+              <div>
+                <strong>Hollow Knight</strong>
+                <div class="tag">Indie</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">$7.49</div>
+                <button class="buy-btn" data-game="Hollow Knight">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/descarga%20(1).jpg" alt="Forza Horizon 5" />
+            <div class="game-meta">
+              <div>
+                <strong>Forza Horizon 5</strong>
+                <div class="tag">Rancing</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">$59.99</div>
+                <button class="buy-btn" data-game="Forza Horizon 5">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/albion.jpg" alt="Albion Online" />
+            <div class="game-meta">
+              <div>
+                <strong>Albion Online</strong>
+                <div class="tag">RPG</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">Gratis</div>
+                <button class="buy-btn" data-game="Albion Online">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/diablo.jpg" alt="Diablo Inmortal IV" />
+            <div class="game-meta">
+              <div>
+                <strong>Diablo Inmortal IV</strong>
+                <div class="tag">RPG</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">$49.99</div>
+                <button class="buy-btn" data-game="Diablo Inmortal IV">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/gta.jpg" alt="Grand Theft Auto V" />
+            <div class="game-meta">
+              <div>
+                <strong>Grand Theft Auto V</strong>
+                <div class="tag">Multijugador</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">$19.79</div>
+                <button class="buy-btn" data-game="Grand Theft Auto V">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/images.jpg" alt="Warzone" />
+            <div class="game-meta">
+              <div>
+                <strong>Warzone</strong>
+                <div class="tag">multijugador</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">Gratis</div>
+                <button class="buy-btn" data-game="Warzone">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/fornite.jpg" alt="Fornite" />
+            <div class="game-meta">
+              <div>
+                <strong>Fornite</strong>
+                <div class="tag">Multijugador</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">Gratis</div>
+                <button class="buy-btn" data-game="Fornite">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/counter.jpg" alt="Counter Strike" />
+            <div class="game-meta">
+              <div>
+                <strong>Counter Strike</strong>
+                <div class="tag">Multijugador</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">Gratis</div>
+                <button class="buy-btn" data-game="Counter Strike">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/aset.jpg" alt="Assassin Creed" />
+            <div class="game-meta">
+              <div>
+                <strong>Assassin Creed</strong>
+                <div class="tag">Multijugador</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">$69.99</div>
+                <button class="buy-btn" data-game="Assassin Creed">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+            <article class="game-card">
+            <img src="img/backroom.jpg" alt="Escape the backrooms" />
+            <div class="game-meta">
+              <div>
+                <strong>Escape the backrooms</strong>
+                <div class="tag">Terror</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">$8.99</div>
+                <button class="buy-btn" data-game="Escape the backrooms">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+             <article class="game-card">
+            <img src="img/ark.jpg" alt="Ark survival ascended" />
+            <div class="game-meta">
+              <div>
+                <strong>Ark survival ascended</strong>
+                <div class="tag">Aventura</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">$44.99</div>
+                <button class="buy-btn" data-game="Ark survival ascended">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+                <article class="game-card">
+            <img src="img/forest.jpg" alt="The Forest" />
+            <div class="game-meta">
+              <div>
+                <strong>The Forest</strong>
+                <div class="tag">Terror</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">$4.79</div>
+                <button class="buy-btn" data-game="The Forest">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+                  <article class="game-card">
+            <img src="img/cyberpunk.jpg" alt="Cyberpunk" />
+            <div class="game-meta">
+              <div>
+                <strong>Cyberpunk</strong>
+                <div class="tag">Acción</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">$59.99</div>
+                <button class="buy-btn" data-game="Cyberpunk">Comprar</button>
+              </div>
+            </div>
+          </article>
+          
+                    <article class="game-card">
+            <img src="img/halla.jpg" alt="Brawlhalla" />
+            <div class="game-meta">
+              <div>
+                <strong>Brawlhalla</strong>
+                <div class="tag">Indie</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">Gratis</div>
+                <button class="buy-btn" data-game="Brawlhalla">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+                   <article class="game-card">
+            <img src="img/wukong.jpg" alt="Black Myth: Wukong" />
+            <div class="game-meta">
+              <div>
+                <strong>Black Myth: Wukong</strong>
+                <div class="tag">Aventura</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">$59.99</div>
+                <button class="buy-btn" data-game="Black Myth: Wukong">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/world.jpg" alt="The outer worlds 2" />
+            <div class="game-meta">
+              <div>
+                <strong>The outer worlds 2</strong>
+                <div class="tag">RPG</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">$69.99</div>
+                <button class="buy-btn" data-game="The outer worlds 2">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/dota 2.jpg" alt="Dota 2" />
+            <div class="game-meta">
+              <div>
+                <strong>Dota 2</strong>
+                <div class="tag">Multijugador</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">Gratis</div>
+                <button class="buy-btn" data-game="Dota 2">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          
+          <article class="game-card">
+            <img src="img/euro.jpg" alt="Euro Truck Simulator 2" />
+            <div class="game-meta">
+              <div>
+                <strong>Euro Truck Simulator 2</strong>
+                <div class="tag">Racing</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">Gratis</div>
+                <button class="buy-btn" data-game="Euro Truck Simulator 2">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+             <article class="game-card">
+            <img src="img/apex.jpg" alt="Apex Legends" />
+            <div class="game-meta">
+              <div>
+                <strong>Apex Legends</strong>
+                <div class="tag">Acción</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">Gratis</div>
+                <button class="buy-btn" data-game="Apex Legends">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/battle.jpg" alt="Battlefield 6" />
+            <div class="game-meta">
+              <div>
+                <strong>Battlefield 6</strong>
+                <div class="tag">Acción</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">69.99</div>
+                <button class="buy-btn" data-game="Battlefield 6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <img src="img/descarga (2).jpg" alt="Delta Force" />
+            <div class="game-meta">
+              <div>
+                <strong>Delta Force</strong>
+                <div class="tag">Multijugador</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">Gratis</div>
+                <button class="buy-btn" data-game="Delta Force">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+           <article class="game-card">
+            <img src="img/descarga (3).jpg" alt="PUBG battleground" />
+            <div class="game-meta">
+              <div>
+                <strong>PUBG battleground</strong>
+                <div class="tag">Multijugador</div>
+              </div>
+              <div class="buy-row">
+                <div class="price">Gratis</div>
+                <button class="buy-btn" data-game="PUBG battleground">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Add-to-cart: save items to the same localStorage key used by the main page ('gnow_cart')
+    (function(){
+      function slugify(text){
+        return text.toString().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+      }
+
+      function parsePrice(node){
+        if(!node) return 0;
+        const txt = node.textContent.trim();
+        if(/gratis/i.test(txt)) return 0;
+        // remove currency symbols and spaces, accept comma or dot
+        const num = txt.replace(/[^0-9.,]/g,'').replace(',','.') || '0';
+        return parseFloat(num) || 0;
+      }
+
+      function getCart(){ return JSON.parse(localStorage.getItem('gnow_cart') || '[]'); }
+      function saveCart(cart){ localStorage.setItem('gnow_cart', JSON.stringify(cart)); }
+
+      function addItem(item){
+        const cart = getCart();
+        const existing = cart.find(i=>i.id === item.id);
+        if(existing){ existing.quantity = (existing.quantity||1) + 1; }
+        else{ cart.push(Object.assign({quantity:1}, item)); }
+        saveCart(cart);
+        // update any visible counter on the page
+        const countEl = document.getElementById('cartCount');
+        if(countEl) countEl.textContent = cart.reduce((s,i)=>s+(i.quantity||1),0);
+      }
+
+      document.querySelectorAll('.buy-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const card = e.currentTarget.closest('.game-card');
+          if(!card) return;
+          const titleNode = card.querySelector('strong') || card.querySelector('h4') || card.querySelector('[data-game]');
+          const title = (titleNode ? titleNode.textContent.trim() : (e.currentTarget.dataset.game||'Juego'));
+          const priceNode = card.querySelector('.price');
+          const price = parsePrice(priceNode).toFixed(2);
+          const img = (card.querySelector('img') && card.querySelector('img').src) || '';
+          const id = slugify(title);
+
+          addItem({ id, title, price: Number(price), img });
+
+          // simple feedback
+          const originalText = e.currentTarget.textContent;
+          e.currentTarget.textContent = 'Añadido ✓';
+          setTimeout(()=> e.currentTarget.textContent = originalText, 1200);
+        });
+      });
+    })();
+  </script>
+    <!-- Cart panel (same behavior as main page) -->
+    <style>
+      .btn.cart{background:#16a34a;color:#fff;border:0;padding:8px 12px;border-radius:6px}
+      .cart-count{background:#052e16;color:#fff;padding:2px 7px;border-radius:999px;margin-left:8px;font-weight:700}
+      #cartPanel{display:none;position:fixed;right:16px;top:70px;width:320px;max-height:70vh;overflow:auto;background:#071023;color:#fff;padding:16px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:10000}
+      #cartPanel.open{display:block}
+      #cartPanel h3{margin-top:0}
+      .cart-item{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+      .cart-item img{width:56px;height:40px;object-fit:cover;border-radius:6px}
+      .cart-item .meta{flex:1}
+      .cart-item .remove{background:transparent;border:0;color:#f97316;cursor:pointer}
+      .cart-footer{margin-top:12px;display:flex;justify-content:space-between;align-items:center}
+      .cart-empty{color:#9aa4b2}
+    </style>
+
+    <aside id="cartPanel" aria-hidden="true" aria-labelledby="cartTitle">
+      <h3 id="cartTitle">Tu carrito</h3>
+      <div id="cartItems"></div>
+      <div id="cartEmpty" class="cart-empty">No hay items en el carrito.</div>
+      <div class="cart-footer">
+        <strong>Total: <span id="cartTotal">$0.00</span></strong>
+        <div>
+          <button id="checkoutBtn" class="btn primary">Pagar</button>
+          <button id="closeCart" class="btn ghost">Cerrar</button>
+        </div>
+      </div>
+    </aside>
+
+    <script>
+      // Cart panel rendering and actions (reads/writes gnow_cart in localStorage)
+      (function(){
+        const cartBtn = document.getElementById('cartBtn');
+        const cartPanel = document.getElementById('cartPanel');
+        const closeCart = document.getElementById('closeCart');
+        const cartItemsEl = document.getElementById('cartItems');
+        const cartCountEl = document.getElementById('cartCount');
+        const cartTotalEl = document.getElementById('cartTotal');
+        const cartEmpty = document.getElementById('cartEmpty');
+
+        function getCart(){ return JSON.parse(localStorage.getItem('gnow_cart') || '[]'); }
+        function saveCart(cart){ localStorage.setItem('gnow_cart', JSON.stringify(cart)); }
+        function formatMoney(n){ return '$' + Number(n).toFixed(2); }
+
+        function renderCart(){
+          const cart = getCart();
+          cartItemsEl.innerHTML = '';
+          if(cart.length === 0){ cartEmpty.style.display = 'block'; cartTotalEl.textContent = formatMoney(0); }
+          else{
+            cartEmpty.style.display = 'none';
+            let total = 0;
+            cart.forEach(item => {
+              total += Number(item.price) * (item.quantity || 1);
+              const div = document.createElement('div');
+              div.className = 'cart-item';
+              div.innerHTML = `
+                <img src="${item.img}" alt="${item.title}">
+                <div class="meta"><div>${item.title}</div><div style="font-size:0.85em;color:#9aa4b2">${formatMoney(item.price)} x ${item.quantity||1}</div></div>
+                <button class="remove" data-id="${item.id}">Quitar</button>
+              `;
+              cartItemsEl.appendChild(div);
+            });
+            cartTotalEl.textContent = formatMoney(total);
+          }
+          if(cartCountEl) cartCountEl.textContent = cart.reduce((s,i)=>s+(i.quantity||1),0);
+        }
+
+        function removeFromCart(id){
+          const cart = getCart().filter(i=>i.id!==id);
+          saveCart(cart); renderCart();
+        }
+
+        // open/close
+        cartBtn && cartBtn.addEventListener('click', function(){ cartPanel.classList.toggle('open'); cartPanel.setAttribute('aria-hidden', cartPanel.classList.contains('open') ? 'false' : 'true'); });
+        closeCart && closeCart.addEventListener('click', function(){ cartPanel.classList.remove('open'); cartPanel.setAttribute('aria-hidden','true'); });
+
+        cartItemsEl && cartItemsEl.addEventListener('click', function(e){ if(e.target && e.target.matches('.remove')) removeFromCart(e.target.getAttribute('data-id')); });
+
+        // render on load
+        renderCart();
+        // also re-render if storage changes (another tab)
+        window.addEventListener('storage', function(e){ if(e.key === 'gnow_cart') renderCart(); });
+      })();
+    </script>
+      <script>
+        // Share button (same behavior as main page)
+        (function(){
+          const btn = document.getElementById('shareBtn');
+          if(!btn) return;
+          function copyToClipboard(text){
+            if(navigator.clipboard && navigator.clipboard.writeText){ return navigator.clipboard.writeText(text); }
+            const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){} ta.remove(); return Promise.resolve();
+          }
+          function showToast(msg){ let t = document.getElementById('shareToast'); if(!t){ t = document.createElement('div'); t.id='shareToast'; t.style.position='fixed'; t.style.right='16px'; t.style.bottom='16px'; t.style.background='rgba(0,0,0,.8)'; t.style.color='#fff'; t.style.padding='8px 12px'; t.style.borderRadius='6px'; t.style.zIndex=12001; document.body.appendChild(t);} t.textContent = msg; t.style.opacity='1'; setTimeout(()=>{ t.style.transition='opacity 400ms'; t.style.opacity='0'; },1400); }
+          btn.addEventListener('click', function(){ const shareData = { title: document.title, text: 'Mira la tienda G-Now', url: location.href }; if(navigator.share){ navigator.share(shareData).catch(()=>{}); } else { copyToClipboard(location.href).then(()=> showToast('Enlace copiado al portapapeles')); } });
+        })();
+      </script>
+  <script>
+    // Search/filter for store games (live + Enter key)
+    (function(){
+      const input = document.getElementById('gameSearch');
+      const cards = Array.from(document.querySelectorAll('.store-grid .game-card'));
+      const noResults = document.getElementById('noResults');
+      if(!input) return;
+
+      function normalize(s){ return (s||'').toString().trim().toLowerCase(); }
+
+      function filter(q){
+        const qn = normalize(q);
+        let visible = 0;
+        cards.forEach(card => {
+          const titleEl = card.querySelector('strong') || card.querySelector('h4');
+          const tagEl = card.querySelector('.tag');
+          const title = normalize(titleEl && (titleEl.textContent || titleEl.innerText));
+          const tag = normalize(tagEl && (tagEl.textContent || tagEl.innerText));
+          const alt = normalize(card.querySelector('img') && card.querySelector('img').alt);
+          const match = qn === '' || title.includes(qn) || tag.includes(qn) || alt.includes(qn);
+          card.style.display = match ? '' : 'none';
+          if(match) visible++;
+        });
+        noResults.style.display = visible === 0 ? 'block' : 'none';
+        return visible;
+      }
+
+      // live search
+      input.addEventListener('input', function(e){ filter(e.target.value); });
+
+      // Enter focuses first visible game's buy button
+      input.addEventListener('keyup', function(e){
+        if(e.key === 'Enter'){
+          const first = document.querySelector('.store-grid .game-card:not([style*="display: none"])');
+          if(first){ const btn = first.querySelector('.buy-btn'); btn && btn.focus(); }
+        }
+      });
+
+      // optional: clear search on Escape
+      input.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ input.value=''; filter(''); input.blur(); } });
+    })();
+  </script>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© 2025 G-Now Clone</div>
+      <nav class="footer-nav">
+        <a href="#">Ayuda</a>
+        <a href="#">Términos</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

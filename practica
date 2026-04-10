@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+<title>Mi primera pagina web</title>
+
+  </head>
+  <body>
+ <h1>los gustos de Sandy y Engels</h1>
+
+ <p>Este es mi primer parrafo.</p>
+ <p>El animal favorito de Engels es la serpiente, y el de Sandy es el tiburon</p>
+ <p>A sandy le encanta jugar en la pc gamer y ami me gusta jugar basket ball</p>
+  </body>
+</html>

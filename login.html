@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Iniciar sesión / Registrarse</title>
+  <link rel="stylesheet" href="styles/geforce.css">
+  <style>
+    body{background:#071023;color:#e6eef8;font-family:Arial,Helvetica,sans-serif;padding:24px}
+    .card{max-width:520px;margin:28px auto;background:rgba(255,255,255,0.03);padding:20px;border-radius:8px}
+    .tabs{display:flex;gap:8px;margin-bottom:12px}
+    .tabs button{flex:1;padding:10px;border-radius:6px;border:0;background:transparent;color:#cbd5e1;cursor:pointer}
+    .tabs button.active{background:#0b1520;color:#fff}
+    form{display:none;gap:8px}
+    form.active{display:block}
+    label{display:block;font-size:0.9em;margin-bottom:6px;color:#cbd5e1}
+    input{width:100%;padding:10px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff}
+    .btn{display:inline-block;padding:10px 14px;border-radius:6px;border:0;cursor:pointer}
+    .btn.primary{background:#16a34a;color:#fff}
+    .muted{font-size:0.9em;color:#9aa4b2;margin-top:8px}
+    .message{margin-top:12px;padding:10px;border-radius:6px}
+    .message.success{background:#052e16;color:#b7f5c9}
+    .message.error{background:#2a0b0b;color:#ffd2d2}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2 style="margin-top:0">Cuenta</h2>
+    <div class="tabs">
+      <button id="tabLogin" class="active">Iniciar sesión</button>
+      <button id="tabRegister">Registrarse</button>
+    </div>
+
+    <form id="loginForm" class="active">
+      <label for="loginEmail">Correo electrónico</label>
+      <input id="loginEmail" type="email" placeholder="tu@correo.com" required />
+      <label for="loginPassword">Contraseña</label>
+      <input id="loginPassword" type="password" placeholder="Contraseña" required />
+      <div style="margin-top:12px">
+        <button id="doLogin" class="btn primary">Entrar</button>
+      </div>
+      <div id="loginMsg" class="message" style="display:none"></div>
+    </form>
+
+    <form id="registerForm">
+      <label for="regName">Nombre</label>
+      <input id="regName" type="text" placeholder="Tu nombre" required />
+      <label for="regEmail">Correo electrónico</label>
+      <input id="regEmail" type="email" placeholder="tu@correo.com" required />
+      <label for="regPassword">Contraseña</label>
+      <input id="regPassword" type="password" placeholder="Contraseña (mín 6 caracteres)" required />
+      <div style="margin-top:12px">
+        <button id="doRegister" class="btn primary">Registrarme</button>
+      </div>
+      <div id="regMsg" class="message" style="display:none"></div>
+    </form>
+
+    <p class="muted">Nota: Esta implementación guarda usuarios localmente en el navegador para demostración. No usar en producción.</p>
+  </div>
+
+  <script>
+    // pestañas
+    const tabLogin = document.getElementById('tabLogin');
+    const tabRegister = document.getElementById('tabRegister');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    tabLogin.addEventListener('click', ()=>{ tabLogin.classList.add('active'); tabRegister.classList.remove('active'); loginForm.classList.add('active'); registerForm.classList.remove('active'); });
+    tabRegister.addEventListener('click', ()=>{ tabRegister.classList.add('active'); tabLogin.classList.remove('active'); registerForm.classList.add('active'); loginForm.classList.remove('active'); });
+
+    // util - obtener usuarios desde localStorage
+    function getUsers(){ try{ return JSON.parse(localStorage.getItem('gnow_users')||'[]'); }catch(e){ return []; } }
+    function saveUsers(u){ localStorage.setItem('gnow_users', JSON.stringify(u)); }
+
+    // registro simple
+    document.getElementById('doRegister').addEventListener('click', function(e){
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('regPassword').value;
+      const msg = document.getElementById('regMsg');
+      msg.style.display = 'none';
+      if(!name || !email || pass.length < 6){ msg.textContent = 'Completa todos los campos y usa al menos 6 caracteres en la contraseña.'; msg.className='message error'; msg.style.display='block'; return; }
+      const users = getUsers();
+      if(users.find(u=>u.email===email)){ msg.textContent='Ya existe una cuenta con ese correo.'; msg.className='message error'; msg.style.display='block'; return; }
+      users.push({name, email, password:pass});
+      saveUsers(users);
+      msg.textContent = 'Registro completado. Ya puedes iniciar sesión.'; msg.className='message success'; msg.style.display='block';
+      // opcional: cambiar a login
+      tabLogin.click();
+    });
+
+    // login simple
+    document.getElementById('doLogin').addEventListener('click', function(e){
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('loginPassword').value;
+      const msg = document.getElementById('loginMsg');
+      msg.style.display = 'none';
+      const users = getUsers();
+      const user = users.find(u=>u.email===email && u.password===pass);
+      if(!user){ msg.textContent = 'Correo o contraseña incorrectos.'; msg.className='message error'; msg.style.display='block'; return; }
+      msg.textContent = 'Has iniciado sesión como ' + user.name + '.'; msg.className='message success'; msg.style.display='block';
+      // guardar sesión básica (no segura) y redirigir a la página principal
+      localStorage.setItem('gnow_current_user', JSON.stringify({name:user.name,email:user.email}));
+      setTimeout(()=>{ location.href = 'geforce-clone.html'; }, 900);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mi Primera Página Web</title>
+</head>
+<body>
+
+    <h1>¡Hola, mundo!</h1>
+
+    <p>Este es mi primer párrafo.</p>
+
+    <img src="images/porsche.avif" alt="Descripción de la imagen">
+
+    <audio src="ruta/a/tu/audio.mp3" controls></audio>
+
+    <video src="ruta/a/tu/video.mp4" controls></video>
+
+</body>
+</html>
+
+
